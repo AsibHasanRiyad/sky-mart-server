@@ -37,17 +37,19 @@ async function run() {
     });
 
     //cart related api
-    app.post('/cart', async (req, res) => {
-        const data = req.body;
-        const result = await cartCollection.insertOne(data);
-        res.send(result);
-    })
-    app.get('/cart', async (req, res) => {
-        const email = req.query.email
-        const filter = {buyerEmail: email}
-        const result = await cartCollection.find(filter).toArray();
-        res.send(result);
-    })
+    app.post("/cart", async (req, res) => {
+      const data = req.body;
+      const result = await cartCollection.insertOne(data);
+      res.send(result);
+    });
+    app.get("/cart", async (req, res) => {
+      const email = req.query.email;
+      const filter = {
+        buyerEmail: email,
+      };
+      const result = await cartCollection.find(filter).toArray();
+      res.send(result);
+    });
 
     await client.db("admin").command({ ping: 1 });
     console.log(
